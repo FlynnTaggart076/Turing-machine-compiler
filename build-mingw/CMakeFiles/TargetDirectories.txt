@@ -1,0 +1,3 @@
+D:/Documents/Programms/MEPhI_progs/grade 3/Informatics_labs/LAB-4/build-mingw/CMakeFiles/turing_machine.dir
+D:/Documents/Programms/MEPhI_progs/grade 3/Informatics_labs/LAB-4/build-mingw/CMakeFiles/edit_cache.dir
+D:/Documents/Programms/MEPhI_progs/grade 3/Informatics_labs/LAB-4/build-mingw/CMakeFiles/rebuild_cache.dir

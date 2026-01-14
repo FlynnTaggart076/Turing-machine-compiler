@@ -1,0 +1,93 @@
+main.cpp
+    int main() 
+        создаёт sf::RenderWindow
+        создаёт App и запускает главный цикл
+
+App.h / App.cpp
+    class App — “оркестратор” приложения (UI-состояние + вызовы компилятора/исполнителя)
+    Поля
+        std::string sourceCode — текст программы мини-языка
+        bool sourceDirty — флаг устаревания компиляции (true после Edit, false после Compile)
+        CompileResult lastCompile — результат последней компиляции (таблица + диагностика)
+        TuringMachine tm — текущая конфигурация МТ (лента/головка/состояние)
+        Interpreter interpreter — логика выполнения (step/run)
+        AppMode mode — состояние системы (см. автомат ниже)
+    Методы
+        void handleEvent(const sf::Event&) — обработка ввода и команд (Compile/Run/Step/Stop/Reset)
+        void update(float dt) — тики исполнения, если режим “Running”
+        void render(sf::RenderWindow&) — отрисовка текущих данных (без детализации)
+        void requestCompile() — запускает компиляцию и обновляет lastCompile/mode
+        void requestResetMachine() — сброс МТ к начальному состоянию/ленте
+        void requestStep() — выполнить один шаг, обновить режим при halt/error
+        void requestRun() / void requestPause() / void requestStop() — управление выполнением
+
+Compiler.h / Compiler.cpp
+    class Compiler — компиляция исходника в таблицу переходов
+    Методы
+        CompileResult compile(std::string_view source) — основной вход
+    (внутренние структуры парсера/IR могут быть приватными в .cpp, чтобы не плодить файлы)
+
+    struct CompileResult
+    Поля
+        bool ok
+        TransitionTable table — валидная только если ok == true
+        std::vector<Diagnostic> diagnostics — ошибки/предупреждения
+
+    struct Diagnostic
+    Поля
+        DiagnosticLevel level — error/warn/info 
+        int line, column — позиция (минимально достаточно)
+        std::string message — текст сообщения
+
+TransitionTable.h / TransitionTable.cpp
+    class TransitionTable — “программа” МТ (детерминированная таблица переходов)
+    Поля
+        StateId startState — начальное состояние (или фиксированное значение)
+        StateId haltState — состояние останова (опционально)
+        /* контейнер */ transitions — отображение (state, symbol) -> action
+    Методы
+        bool add(StateId s, Symbol a, const Transition& t) — добавить переход (с защитой от дублей)
+        bool has(StateId s, Symbol a) const
+        const Transition* get(StateId s, Symbol a) const — вернуть переход или nullptr
+        bool validate(std::vector<Diagnostic>& out) const — базовые инварианты (детерминизм, достижимость — опционально)
+
+    struct Transition
+    Поля
+        StateId nextState
+        Symbol writeSymbol
+        Move move — Left/Right/Stay
+
+TuringMachine.h / TuringMachine.cpp
+    class TuringMachine — конфигурация МТ (состояние вычисления)
+    Поля
+        Tape tape — лента
+        long long head — позиция головки
+        StateId state — текущее состояние
+        bool halted
+        uint64_t steps — счётчик шагов (для отладки, без лимитов)
+    Методы
+        void reset(const Tape& initialTape, StateId startState) — сброс
+        Symbol read() const
+        void write(Symbol)
+        void move(Move)
+        StateId getState() const / void setState(StateId)
+        bool isHalted() const
+
+    class Tape — модель “бесконечной” ленты (внутри файла, если хотите меньше файлов)
+    Поля
+        Symbol blank — символ пустой ячейки (используем пробел)
+        /* контейнер */ cells — хранение только непустых ячеек (например, map/unordered_map)
+    Методы
+        Symbol get(long long pos) const
+        void set(long long pos, Symbol value)   
+        void clear()
+
+Interpreter.h / Interpreter.cpp
+    class Interpreter — выполнение таблицы переходов над TuringMachine
+    Методы
+        StepResult step(TuringMachine& tm, const TransitionTable& table) — один переход
+    
+    enum class StepResult
+        Ok — шаг выполнен
+        Halted — достигнут halt/нет переходов
+        NoTransition — отсутствует правило для (state, symbol) (можно объединить с Halted, но полезно различать)
