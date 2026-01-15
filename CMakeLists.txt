@@ -10,6 +10,11 @@ find_package(SFML 3 REQUIRED COMPONENTS Graphics Window System Main)
 
 add_executable(turing_machine
     src/App.cpp
+    src/Lexer.cpp
+    src/Condition.cpp
+    src/IR.cpp
+    src/Flatten.cpp
+    src/TransitionGenerator.cpp
     src/Compiler.cpp
     src/Interpreter.cpp
     src/TransitionTable.cpp

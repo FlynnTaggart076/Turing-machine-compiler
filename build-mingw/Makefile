@@ -176,6 +176,78 @@ src/Compiler.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\turing_machine.dir\build.make CMakeFiles/turing_machine.dir/src/Compiler.cpp.s
 .PHONY : src/Compiler.cpp.s
 
+src/Condition.obj: src/Condition.cpp.obj
+.PHONY : src/Condition.obj
+
+# target to build an object file
+src/Condition.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\turing_machine.dir\build.make CMakeFiles/turing_machine.dir/src/Condition.cpp.obj
+.PHONY : src/Condition.cpp.obj
+
+src/Condition.i: src/Condition.cpp.i
+.PHONY : src/Condition.i
+
+# target to preprocess a source file
+src/Condition.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\turing_machine.dir\build.make CMakeFiles/turing_machine.dir/src/Condition.cpp.i
+.PHONY : src/Condition.cpp.i
+
+src/Condition.s: src/Condition.cpp.s
+.PHONY : src/Condition.s
+
+# target to generate assembly for a file
+src/Condition.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\turing_machine.dir\build.make CMakeFiles/turing_machine.dir/src/Condition.cpp.s
+.PHONY : src/Condition.cpp.s
+
+src/Flatten.obj: src/Flatten.cpp.obj
+.PHONY : src/Flatten.obj
+
+# target to build an object file
+src/Flatten.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\turing_machine.dir\build.make CMakeFiles/turing_machine.dir/src/Flatten.cpp.obj
+.PHONY : src/Flatten.cpp.obj
+
+src/Flatten.i: src/Flatten.cpp.i
+.PHONY : src/Flatten.i
+
+# target to preprocess a source file
+src/Flatten.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\turing_machine.dir\build.make CMakeFiles/turing_machine.dir/src/Flatten.cpp.i
+.PHONY : src/Flatten.cpp.i
+
+src/Flatten.s: src/Flatten.cpp.s
+.PHONY : src/Flatten.s
+
+# target to generate assembly for a file
+src/Flatten.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\turing_machine.dir\build.make CMakeFiles/turing_machine.dir/src/Flatten.cpp.s
+.PHONY : src/Flatten.cpp.s
+
+src/IR.obj: src/IR.cpp.obj
+.PHONY : src/IR.obj
+
+# target to build an object file
+src/IR.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\turing_machine.dir\build.make CMakeFiles/turing_machine.dir/src/IR.cpp.obj
+.PHONY : src/IR.cpp.obj
+
+src/IR.i: src/IR.cpp.i
+.PHONY : src/IR.i
+
+# target to preprocess a source file
+src/IR.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\turing_machine.dir\build.make CMakeFiles/turing_machine.dir/src/IR.cpp.i
+.PHONY : src/IR.cpp.i
+
+src/IR.s: src/IR.cpp.s
+.PHONY : src/IR.s
+
+# target to generate assembly for a file
+src/IR.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\turing_machine.dir\build.make CMakeFiles/turing_machine.dir/src/IR.cpp.s
+.PHONY : src/IR.cpp.s
+
 src/Interpreter.obj: src/Interpreter.cpp.obj
 .PHONY : src/Interpreter.obj
 
@@ -199,6 +271,54 @@ src/Interpreter.s: src/Interpreter.cpp.s
 src/Interpreter.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\turing_machine.dir\build.make CMakeFiles/turing_machine.dir/src/Interpreter.cpp.s
 .PHONY : src/Interpreter.cpp.s
+
+src/Lexer.obj: src/Lexer.cpp.obj
+.PHONY : src/Lexer.obj
+
+# target to build an object file
+src/Lexer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\turing_machine.dir\build.make CMakeFiles/turing_machine.dir/src/Lexer.cpp.obj
+.PHONY : src/Lexer.cpp.obj
+
+src/Lexer.i: src/Lexer.cpp.i
+.PHONY : src/Lexer.i
+
+# target to preprocess a source file
+src/Lexer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\turing_machine.dir\build.make CMakeFiles/turing_machine.dir/src/Lexer.cpp.i
+.PHONY : src/Lexer.cpp.i
+
+src/Lexer.s: src/Lexer.cpp.s
+.PHONY : src/Lexer.s
+
+# target to generate assembly for a file
+src/Lexer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\turing_machine.dir\build.make CMakeFiles/turing_machine.dir/src/Lexer.cpp.s
+.PHONY : src/Lexer.cpp.s
+
+src/TransitionGenerator.obj: src/TransitionGenerator.cpp.obj
+.PHONY : src/TransitionGenerator.obj
+
+# target to build an object file
+src/TransitionGenerator.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\turing_machine.dir\build.make CMakeFiles/turing_machine.dir/src/TransitionGenerator.cpp.obj
+.PHONY : src/TransitionGenerator.cpp.obj
+
+src/TransitionGenerator.i: src/TransitionGenerator.cpp.i
+.PHONY : src/TransitionGenerator.i
+
+# target to preprocess a source file
+src/TransitionGenerator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\turing_machine.dir\build.make CMakeFiles/turing_machine.dir/src/TransitionGenerator.cpp.i
+.PHONY : src/TransitionGenerator.cpp.i
+
+src/TransitionGenerator.s: src/TransitionGenerator.cpp.s
+.PHONY : src/TransitionGenerator.s
+
+# target to generate assembly for a file
+src/TransitionGenerator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\turing_machine.dir\build.make CMakeFiles/turing_machine.dir/src/TransitionGenerator.cpp.s
+.PHONY : src/TransitionGenerator.cpp.s
 
 src/TransitionTable.obj: src/TransitionTable.cpp.obj
 .PHONY : src/TransitionTable.obj
@@ -287,9 +407,24 @@ help:
 	@echo ... src/Compiler.obj
 	@echo ... src/Compiler.i
 	@echo ... src/Compiler.s
+	@echo ... src/Condition.obj
+	@echo ... src/Condition.i
+	@echo ... src/Condition.s
+	@echo ... src/Flatten.obj
+	@echo ... src/Flatten.i
+	@echo ... src/Flatten.s
+	@echo ... src/IR.obj
+	@echo ... src/IR.i
+	@echo ... src/IR.s
 	@echo ... src/Interpreter.obj
 	@echo ... src/Interpreter.i
 	@echo ... src/Interpreter.s
+	@echo ... src/Lexer.obj
+	@echo ... src/Lexer.i
+	@echo ... src/Lexer.s
+	@echo ... src/TransitionGenerator.obj
+	@echo ... src/TransitionGenerator.i
+	@echo ... src/TransitionGenerator.s
 	@echo ... src/TransitionTable.obj
 	@echo ... src/TransitionTable.i
 	@echo ... src/TransitionTable.s

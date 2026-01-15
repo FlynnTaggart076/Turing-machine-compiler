@@ -130,15 +130,9 @@ CMakeFiles/turing_machine.dir/src/Compiler.cpp.obj: \
  D:/Documents/Programms/MEPhI_progs/grade\ 3/Informatics_labs/LAB-4/include/TuringMachine.h \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/utility \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_relops.h \
- C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/algorithm \
- C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_algo.h \
- C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/algorithmfwd.h \
- C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_heap.h \
- C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/uniform_int_dist.h \
- C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_tempbuf.h \
- C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/pstl/glue_algorithm_defs.h \
- C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/pstl/execution_defs.h \
+ D:/Documents/Programms/MEPhI_progs/grade\ 3/Informatics_labs/LAB-4/include/Condition.h \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/memory \
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_tempbuf.h \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_raw_storage_iter.h \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/align.h \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/unique_ptr.h \
@@ -173,6 +167,17 @@ CMakeFiles/turing_machine.dir/src/Compiler.cpp.obj: \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/atomic_lockfree_defines.h \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/backward/auto_ptr.h \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/pstl/glue_memory_defs.h \
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/pstl/execution_defs.h \
+ D:/Documents/Programms/MEPhI_progs/grade\ 3/Informatics_labs/LAB-4/include/Lexer.h \
+ D:/Documents/Programms/MEPhI_progs/grade\ 3/Informatics_labs/LAB-4/include/Flatten.h \
+ D:/Documents/Programms/MEPhI_progs/grade\ 3/Informatics_labs/LAB-4/include/IR.h \
+ D:/Documents/Programms/MEPhI_progs/grade\ 3/Informatics_labs/LAB-4/include/TransitionGenerator.h \
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/algorithm \
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_algo.h \
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/algorithmfwd.h \
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/stl_heap.h \
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/bits/uniform_int_dist.h \
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/pstl/glue_algorithm_defs.h \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/sstream \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/istream \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/c++/ios \

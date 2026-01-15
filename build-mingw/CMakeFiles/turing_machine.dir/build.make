@@ -86,11 +86,86 @@ CMakeFiles/turing_machine.dir/src/App.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/turing_machine.dir/src/App.cpp.s"
 	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\src\App.cpp" -o CMakeFiles\turing_machine.dir\src\App.cpp.s
 
+CMakeFiles/turing_machine.dir/src/Lexer.cpp.obj: CMakeFiles/turing_machine.dir/flags.make
+CMakeFiles/turing_machine.dir/src/Lexer.cpp.obj: CMakeFiles/turing_machine.dir/includes_CXX.rsp
+CMakeFiles/turing_machine.dir/src/Lexer.cpp.obj: D:/Documents/Programms/MEPhI_progs/grade\ 3/Informatics_labs/LAB-4/src/Lexer.cpp
+CMakeFiles/turing_machine.dir/src/Lexer.cpp.obj: CMakeFiles/turing_machine.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\build-mingw\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/turing_machine.dir/src/Lexer.cpp.obj"
+	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/turing_machine.dir/src/Lexer.cpp.obj -MF CMakeFiles\turing_machine.dir\src\Lexer.cpp.obj.d -o CMakeFiles\turing_machine.dir\src\Lexer.cpp.obj -c "D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\src\Lexer.cpp"
+
+CMakeFiles/turing_machine.dir/src/Lexer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/turing_machine.dir/src/Lexer.cpp.i"
+	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\src\Lexer.cpp" > CMakeFiles\turing_machine.dir\src\Lexer.cpp.i
+
+CMakeFiles/turing_machine.dir/src/Lexer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/turing_machine.dir/src/Lexer.cpp.s"
+	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\src\Lexer.cpp" -o CMakeFiles\turing_machine.dir\src\Lexer.cpp.s
+
+CMakeFiles/turing_machine.dir/src/Condition.cpp.obj: CMakeFiles/turing_machine.dir/flags.make
+CMakeFiles/turing_machine.dir/src/Condition.cpp.obj: CMakeFiles/turing_machine.dir/includes_CXX.rsp
+CMakeFiles/turing_machine.dir/src/Condition.cpp.obj: D:/Documents/Programms/MEPhI_progs/grade\ 3/Informatics_labs/LAB-4/src/Condition.cpp
+CMakeFiles/turing_machine.dir/src/Condition.cpp.obj: CMakeFiles/turing_machine.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\build-mingw\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/turing_machine.dir/src/Condition.cpp.obj"
+	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/turing_machine.dir/src/Condition.cpp.obj -MF CMakeFiles\turing_machine.dir\src\Condition.cpp.obj.d -o CMakeFiles\turing_machine.dir\src\Condition.cpp.obj -c "D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\src\Condition.cpp"
+
+CMakeFiles/turing_machine.dir/src/Condition.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/turing_machine.dir/src/Condition.cpp.i"
+	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\src\Condition.cpp" > CMakeFiles\turing_machine.dir\src\Condition.cpp.i
+
+CMakeFiles/turing_machine.dir/src/Condition.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/turing_machine.dir/src/Condition.cpp.s"
+	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\src\Condition.cpp" -o CMakeFiles\turing_machine.dir\src\Condition.cpp.s
+
+CMakeFiles/turing_machine.dir/src/IR.cpp.obj: CMakeFiles/turing_machine.dir/flags.make
+CMakeFiles/turing_machine.dir/src/IR.cpp.obj: CMakeFiles/turing_machine.dir/includes_CXX.rsp
+CMakeFiles/turing_machine.dir/src/IR.cpp.obj: D:/Documents/Programms/MEPhI_progs/grade\ 3/Informatics_labs/LAB-4/src/IR.cpp
+CMakeFiles/turing_machine.dir/src/IR.cpp.obj: CMakeFiles/turing_machine.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\build-mingw\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/turing_machine.dir/src/IR.cpp.obj"
+	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/turing_machine.dir/src/IR.cpp.obj -MF CMakeFiles\turing_machine.dir\src\IR.cpp.obj.d -o CMakeFiles\turing_machine.dir\src\IR.cpp.obj -c "D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\src\IR.cpp"
+
+CMakeFiles/turing_machine.dir/src/IR.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/turing_machine.dir/src/IR.cpp.i"
+	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\src\IR.cpp" > CMakeFiles\turing_machine.dir\src\IR.cpp.i
+
+CMakeFiles/turing_machine.dir/src/IR.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/turing_machine.dir/src/IR.cpp.s"
+	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\src\IR.cpp" -o CMakeFiles\turing_machine.dir\src\IR.cpp.s
+
+CMakeFiles/turing_machine.dir/src/Flatten.cpp.obj: CMakeFiles/turing_machine.dir/flags.make
+CMakeFiles/turing_machine.dir/src/Flatten.cpp.obj: CMakeFiles/turing_machine.dir/includes_CXX.rsp
+CMakeFiles/turing_machine.dir/src/Flatten.cpp.obj: D:/Documents/Programms/MEPhI_progs/grade\ 3/Informatics_labs/LAB-4/src/Flatten.cpp
+CMakeFiles/turing_machine.dir/src/Flatten.cpp.obj: CMakeFiles/turing_machine.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\build-mingw\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/turing_machine.dir/src/Flatten.cpp.obj"
+	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/turing_machine.dir/src/Flatten.cpp.obj -MF CMakeFiles\turing_machine.dir\src\Flatten.cpp.obj.d -o CMakeFiles\turing_machine.dir\src\Flatten.cpp.obj -c "D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\src\Flatten.cpp"
+
+CMakeFiles/turing_machine.dir/src/Flatten.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/turing_machine.dir/src/Flatten.cpp.i"
+	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\src\Flatten.cpp" > CMakeFiles\turing_machine.dir\src\Flatten.cpp.i
+
+CMakeFiles/turing_machine.dir/src/Flatten.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/turing_machine.dir/src/Flatten.cpp.s"
+	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\src\Flatten.cpp" -o CMakeFiles\turing_machine.dir\src\Flatten.cpp.s
+
+CMakeFiles/turing_machine.dir/src/TransitionGenerator.cpp.obj: CMakeFiles/turing_machine.dir/flags.make
+CMakeFiles/turing_machine.dir/src/TransitionGenerator.cpp.obj: CMakeFiles/turing_machine.dir/includes_CXX.rsp
+CMakeFiles/turing_machine.dir/src/TransitionGenerator.cpp.obj: D:/Documents/Programms/MEPhI_progs/grade\ 3/Informatics_labs/LAB-4/src/TransitionGenerator.cpp
+CMakeFiles/turing_machine.dir/src/TransitionGenerator.cpp.obj: CMakeFiles/turing_machine.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\build-mingw\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/turing_machine.dir/src/TransitionGenerator.cpp.obj"
+	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/turing_machine.dir/src/TransitionGenerator.cpp.obj -MF CMakeFiles\turing_machine.dir\src\TransitionGenerator.cpp.obj.d -o CMakeFiles\turing_machine.dir\src\TransitionGenerator.cpp.obj -c "D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\src\TransitionGenerator.cpp"
+
+CMakeFiles/turing_machine.dir/src/TransitionGenerator.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/turing_machine.dir/src/TransitionGenerator.cpp.i"
+	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\src\TransitionGenerator.cpp" > CMakeFiles\turing_machine.dir\src\TransitionGenerator.cpp.i
+
+CMakeFiles/turing_machine.dir/src/TransitionGenerator.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/turing_machine.dir/src/TransitionGenerator.cpp.s"
+	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\src\TransitionGenerator.cpp" -o CMakeFiles\turing_machine.dir\src\TransitionGenerator.cpp.s
+
 CMakeFiles/turing_machine.dir/src/Compiler.cpp.obj: CMakeFiles/turing_machine.dir/flags.make
 CMakeFiles/turing_machine.dir/src/Compiler.cpp.obj: CMakeFiles/turing_machine.dir/includes_CXX.rsp
 CMakeFiles/turing_machine.dir/src/Compiler.cpp.obj: D:/Documents/Programms/MEPhI_progs/grade\ 3/Informatics_labs/LAB-4/src/Compiler.cpp
 CMakeFiles/turing_machine.dir/src/Compiler.cpp.obj: CMakeFiles/turing_machine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\build-mingw\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/turing_machine.dir/src/Compiler.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\build-mingw\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/turing_machine.dir/src/Compiler.cpp.obj"
 	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/turing_machine.dir/src/Compiler.cpp.obj -MF CMakeFiles\turing_machine.dir\src\Compiler.cpp.obj.d -o CMakeFiles\turing_machine.dir\src\Compiler.cpp.obj -c "D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\src\Compiler.cpp"
 
 CMakeFiles/turing_machine.dir/src/Compiler.cpp.i: cmake_force
@@ -105,7 +180,7 @@ CMakeFiles/turing_machine.dir/src/Interpreter.cpp.obj: CMakeFiles/turing_machine
 CMakeFiles/turing_machine.dir/src/Interpreter.cpp.obj: CMakeFiles/turing_machine.dir/includes_CXX.rsp
 CMakeFiles/turing_machine.dir/src/Interpreter.cpp.obj: D:/Documents/Programms/MEPhI_progs/grade\ 3/Informatics_labs/LAB-4/src/Interpreter.cpp
 CMakeFiles/turing_machine.dir/src/Interpreter.cpp.obj: CMakeFiles/turing_machine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\build-mingw\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/turing_machine.dir/src/Interpreter.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\build-mingw\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/turing_machine.dir/src/Interpreter.cpp.obj"
 	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/turing_machine.dir/src/Interpreter.cpp.obj -MF CMakeFiles\turing_machine.dir\src\Interpreter.cpp.obj.d -o CMakeFiles\turing_machine.dir\src\Interpreter.cpp.obj -c "D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\src\Interpreter.cpp"
 
 CMakeFiles/turing_machine.dir/src/Interpreter.cpp.i: cmake_force
@@ -120,7 +195,7 @@ CMakeFiles/turing_machine.dir/src/TransitionTable.cpp.obj: CMakeFiles/turing_mac
 CMakeFiles/turing_machine.dir/src/TransitionTable.cpp.obj: CMakeFiles/turing_machine.dir/includes_CXX.rsp
 CMakeFiles/turing_machine.dir/src/TransitionTable.cpp.obj: D:/Documents/Programms/MEPhI_progs/grade\ 3/Informatics_labs/LAB-4/src/TransitionTable.cpp
 CMakeFiles/turing_machine.dir/src/TransitionTable.cpp.obj: CMakeFiles/turing_machine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\build-mingw\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/turing_machine.dir/src/TransitionTable.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\build-mingw\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/turing_machine.dir/src/TransitionTable.cpp.obj"
 	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/turing_machine.dir/src/TransitionTable.cpp.obj -MF CMakeFiles\turing_machine.dir\src\TransitionTable.cpp.obj.d -o CMakeFiles\turing_machine.dir\src\TransitionTable.cpp.obj -c "D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\src\TransitionTable.cpp"
 
 CMakeFiles/turing_machine.dir/src/TransitionTable.cpp.i: cmake_force
@@ -135,7 +210,7 @@ CMakeFiles/turing_machine.dir/src/TuringMachine.cpp.obj: CMakeFiles/turing_machi
 CMakeFiles/turing_machine.dir/src/TuringMachine.cpp.obj: CMakeFiles/turing_machine.dir/includes_CXX.rsp
 CMakeFiles/turing_machine.dir/src/TuringMachine.cpp.obj: D:/Documents/Programms/MEPhI_progs/grade\ 3/Informatics_labs/LAB-4/src/TuringMachine.cpp
 CMakeFiles/turing_machine.dir/src/TuringMachine.cpp.obj: CMakeFiles/turing_machine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\build-mingw\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/turing_machine.dir/src/TuringMachine.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\build-mingw\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/turing_machine.dir/src/TuringMachine.cpp.obj"
 	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/turing_machine.dir/src/TuringMachine.cpp.obj -MF CMakeFiles\turing_machine.dir\src\TuringMachine.cpp.obj.d -o CMakeFiles\turing_machine.dir\src\TuringMachine.cpp.obj -c "D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\src\TuringMachine.cpp"
 
 CMakeFiles/turing_machine.dir/src/TuringMachine.cpp.i: cmake_force
@@ -150,7 +225,7 @@ CMakeFiles/turing_machine.dir/src/main.cpp.obj: CMakeFiles/turing_machine.dir/fl
 CMakeFiles/turing_machine.dir/src/main.cpp.obj: CMakeFiles/turing_machine.dir/includes_CXX.rsp
 CMakeFiles/turing_machine.dir/src/main.cpp.obj: D:/Documents/Programms/MEPhI_progs/grade\ 3/Informatics_labs/LAB-4/src/main.cpp
 CMakeFiles/turing_machine.dir/src/main.cpp.obj: CMakeFiles/turing_machine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\build-mingw\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/turing_machine.dir/src/main.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\build-mingw\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/turing_machine.dir/src/main.cpp.obj"
 	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/turing_machine.dir/src/main.cpp.obj -MF CMakeFiles\turing_machine.dir\src\main.cpp.obj.d -o CMakeFiles\turing_machine.dir\src\main.cpp.obj -c "D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\src\main.cpp"
 
 CMakeFiles/turing_machine.dir/src/main.cpp.i: cmake_force
@@ -164,6 +239,11 @@ CMakeFiles/turing_machine.dir/src/main.cpp.s: cmake_force
 # Object files for target turing_machine
 turing_machine_OBJECTS = \
 "CMakeFiles/turing_machine.dir/src/App.cpp.obj" \
+"CMakeFiles/turing_machine.dir/src/Lexer.cpp.obj" \
+"CMakeFiles/turing_machine.dir/src/Condition.cpp.obj" \
+"CMakeFiles/turing_machine.dir/src/IR.cpp.obj" \
+"CMakeFiles/turing_machine.dir/src/Flatten.cpp.obj" \
+"CMakeFiles/turing_machine.dir/src/TransitionGenerator.cpp.obj" \
 "CMakeFiles/turing_machine.dir/src/Compiler.cpp.obj" \
 "CMakeFiles/turing_machine.dir/src/Interpreter.cpp.obj" \
 "CMakeFiles/turing_machine.dir/src/TransitionTable.cpp.obj" \
@@ -174,6 +254,11 @@ turing_machine_OBJECTS = \
 turing_machine_EXTERNAL_OBJECTS =
 
 turing_machine.exe: CMakeFiles/turing_machine.dir/src/App.cpp.obj
+turing_machine.exe: CMakeFiles/turing_machine.dir/src/Lexer.cpp.obj
+turing_machine.exe: CMakeFiles/turing_machine.dir/src/Condition.cpp.obj
+turing_machine.exe: CMakeFiles/turing_machine.dir/src/IR.cpp.obj
+turing_machine.exe: CMakeFiles/turing_machine.dir/src/Flatten.cpp.obj
+turing_machine.exe: CMakeFiles/turing_machine.dir/src/TransitionGenerator.cpp.obj
 turing_machine.exe: CMakeFiles/turing_machine.dir/src/Compiler.cpp.obj
 turing_machine.exe: CMakeFiles/turing_machine.dir/src/Interpreter.cpp.obj
 turing_machine.exe: CMakeFiles/turing_machine.dir/src/TransitionTable.cpp.obj
@@ -187,7 +272,7 @@ turing_machine.exe: D:/Documents/Programms/MEPhI_progs/grade\ 3/Informatics_labs
 turing_machine.exe: CMakeFiles/turing_machine.dir/linkLibs.rsp
 turing_machine.exe: CMakeFiles/turing_machine.dir/objects1.rsp
 turing_machine.exe: CMakeFiles/turing_machine.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\build-mingw\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable turing_machine.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="D:\Documents\Programms\MEPhI_progs\grade 3\Informatics_labs\LAB-4\build-mingw\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable turing_machine.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\turing_machine.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
