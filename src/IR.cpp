@@ -29,3 +29,28 @@ std::shared_ptr<IRInstruction> IRInstruction::whileLoop(ConditionPtr cond, IRBlo
     instr->column = c;
     return instr;
 }
+
+std::shared_ptr<IRInstruction> IRInstruction::varSetConst(int value, int l, int c) {
+    auto instr = std::make_shared<IRInstruction>();
+    instr->type = IRType::VarSetConst;
+    instr->intValue = value;
+    instr->line = l;
+    instr->column = c;
+    return instr;
+}
+
+std::shared_ptr<IRInstruction> IRInstruction::varInc(int l, int c) {
+    auto instr = std::make_shared<IRInstruction>();
+    instr->type = IRType::VarInc;
+    instr->line = l;
+    instr->column = c;
+    return instr;
+}
+
+std::shared_ptr<IRInstruction> IRInstruction::varDec(int l, int c) {
+    auto instr = std::make_shared<IRInstruction>();
+    instr->type = IRType::VarDec;
+    instr->line = l;
+    instr->column = c;
+    return instr;
+}

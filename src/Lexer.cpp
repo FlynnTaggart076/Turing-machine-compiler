@@ -41,10 +41,17 @@ Token Lexer::next() {
         return {TokenType::RParen, ")", startLine, startCol};
     }
 
+    // == (двойное равно)
     if (c == '=' && pos_ + 1 < source_.size() && source_[pos_ + 1] == '=') {
         advance();
         advance();
         return {TokenType::EqEq, "==", startLine, startCol};
+    }
+
+    // = (одинарное равно - присваивание)
+    if (c == '=') {
+        advance();
+        return {TokenType::Assign, "=", startLine, startCol};
     }
 
     if (c == '!' && pos_ + 1 < source_.size() && source_[pos_ + 1] == '=') {
@@ -53,8 +60,40 @@ Token Lexer::next() {
         return {TokenType::NotEq, "!=", startLine, startCol};
     }
 
+    // < (меньше)
+    if (c == '<') {
+        advance();
+        return {TokenType::Less, "<", startLine, startCol};
+    }
+
+    // > (больше)
+    if (c == '>') {
+        advance();
+        return {TokenType::Greater, ">", startLine, startCol};
+    }
+
+    // ++ (инкремент)
+    if (c == '+' && pos_ + 1 < source_.size() && source_[pos_ + 1] == '+') {
+        advance();
+        advance();
+        return {TokenType::PlusPlus, "++", startLine, startCol};
+    }
+
+    // -- (декремент)
+    if (c == '-' && pos_ + 1 < source_.size() && source_[pos_ + 1] == '-') {
+        advance();
+        advance();
+        return {TokenType::MinusMinus, "--", startLine, startCol};
+    }
+
     if (c == '"') {
         return readStringLiteral(startLine, startCol);
+    }
+
+    // Числовой литерал (включая отрицательные числа)
+    if (std::isdigit(static_cast<unsigned char>(c)) || 
+        (c == '-' && pos_ + 1 < source_.size() && std::isdigit(static_cast<unsigned char>(source_[pos_ + 1])))) {
+        return readNumber(startLine, startCol);
     }
 
     if (std::isalpha(static_cast<unsigned char>(c)) || c == '_') {
@@ -143,4 +182,22 @@ Token Lexer::readIdentifier(int startLine, int startCol) {
     }
 
     return {TokenType::Identifier, value, startLine, startCol};
+}
+
+Token Lexer::readNumber(int startLine, int startCol) {
+    std::string value;
+
+    // Обработка знака минус для отрицательных чисел
+    if (source_[pos_] == '-') {
+        value.push_back('-');
+        advance();
+    }
+
+    // Считываем цифры
+    while (pos_ < source_.size() && std::isdigit(static_cast<unsigned char>(source_[pos_]))) {
+        value.push_back(source_[pos_]);
+        advance();
+    }
+
+    return {TokenType::Number, value, startLine, startCol};
 }

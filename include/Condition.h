@@ -11,12 +11,14 @@
 
 /** @brief Типы узлов дерева условий */
 enum class ConditionType {
-    ReadEq,
-    ReadNeq,
-    And,
-    Or,
-    Xor,
-    Not
+    ReadEq,      // ==
+    ReadNeq,     // !=
+    And,         // и
+    Or,          // или
+    Xor,         // исключающее или
+    Not,         // не
+    VarLtConst,  // x < <константа>
+    VarGtConst   // x > <константа>
 };
 
 struct Condition;
@@ -26,6 +28,7 @@ using ConditionPtr = std::shared_ptr<Condition>;
 struct Condition {
     ConditionType type;
     std::string symbol;
+    int intValue{0};        // Для VarLtConst - правая часть сравнения
     ConditionPtr left;
     ConditionPtr right;
     ConditionPtr operand;
@@ -64,10 +67,34 @@ struct Condition {
         cond->operand = op;
         return cond;
     }
+
+    static ConditionPtr varLtConst(int value, int l, int c) {
+        auto cond = std::make_shared<Condition>();
+        cond->type = ConditionType::VarLtConst;
+        cond->intValue = value;
+        cond->line = l;
+        cond->column = c;
+        return cond;
+    }
+
+    static ConditionPtr varGtConst(int value, int l, int c) {
+        auto cond = std::make_shared<Condition>();
+        cond->type = ConditionType::VarGtConst;
+        cond->intValue = value;
+        cond->line = l;
+        cond->column = c;
+        return cond;
+    }
 };
 
 /** @brief Вычисление логического условия для текущего символа */
 bool evaluateCondition(const ConditionPtr& cond, const Symbol& currentSymbol);
+
+/** @brief Проверяет, содержит ли дерево условий узел VarLtConst */
+bool containsVarCondition(const ConditionPtr& cond);
+
+/** @brief Проверяет, является ли условие составным (and/or/xor/not) */
+bool isCompoundCondition(const ConditionPtr& cond);
 
 /** @brief Парсер булевых условий для конструкций if/while */
 class ConditionParser {

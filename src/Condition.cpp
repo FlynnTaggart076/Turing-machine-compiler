@@ -1,5 +1,22 @@
 #include "Condition.h"
 
+bool containsVarCondition(const ConditionPtr& cond) {
+    if (!cond) return false;
+    if (cond->type == ConditionType::VarLtConst || cond->type == ConditionType::VarGtConst) return true;
+    if (cond->left && containsVarCondition(cond->left)) return true;
+    if (cond->right && containsVarCondition(cond->right)) return true;
+    if (cond->operand && containsVarCondition(cond->operand)) return true;
+    return false;
+}
+
+bool isCompoundCondition(const ConditionPtr& cond) {
+    if (!cond) return false;
+    return cond->type == ConditionType::And ||
+           cond->type == ConditionType::Or ||
+           cond->type == ConditionType::Xor ||
+           cond->type == ConditionType::Not;
+}
+
 bool evaluateCondition(const ConditionPtr& cond, const Symbol& currentSymbol) {
     switch (cond->type) {
     case ConditionType::ReadEq:
@@ -17,6 +34,11 @@ bool evaluateCondition(const ConditionPtr& cond, const Symbol& currentSymbol) {
     }
     case ConditionType::Not:
         return !evaluateCondition(cond->operand, currentSymbol);
+    case ConditionType::VarLtConst:
+        // Условие Var обрабатываем отдельно в TransitionGenerator
+        return false; // Заглушка
+    case ConditionType::VarGtConst:
+        return false; // Заглушка
     }
     return false;
 }
@@ -106,6 +128,50 @@ ConditionPtr ConditionParser::parsePrimary() {
         return inner;
     }
 
+    // Условие x < N или x > N
+    if (token_.type == TokenType::Identifier && token_.value == "x") {
+        int xLine = token_.line;
+        int xCol = token_.column;
+        token_ = lexer_.next();
+
+        bool isLess = false;
+        if (token_.type == TokenType::Less) {
+            isLess = true;
+        } else if (token_.type == TokenType::Greater) {
+            isLess = false;
+        } else {
+            error(token_.line, token_.column, "После 'x' в условии ожидалось '<' или '>'");
+            return nullptr;
+        }
+        token_ = lexer_.next();
+
+        if (token_.type != TokenType::Number) {
+            error(token_.line, token_.column, "После 'x <' или 'x >' ожидалось число");
+            return nullptr;
+        }
+
+        int value = 0;
+        try {
+            value = std::stoi(token_.value);
+        } catch (...) {
+            error(token_.line, token_.column, "Некорректное число: '" + token_.value + "'");
+            return nullptr;
+        }
+
+        // Проверка диапазона [-128..127]
+        if (value < -128 || value > 127) {
+            error(token_.line, token_.column, "Значение должно быть в диапазоне [-128..127]");
+            return nullptr;
+        }
+
+        token_ = lexer_.next();
+        if (isLess) {
+            return Condition::varLtConst(value, xLine, xCol);
+        } else {
+            return Condition::varGtConst(value, xLine, xCol);
+        }
+    }
+
     if (token_.type == TokenType::Identifier && token_.value == "read") {
         int readLine = token_.line;
         int readCol = token_.column;
@@ -144,6 +210,6 @@ ConditionPtr ConditionParser::parsePrimary() {
         }
     }
 
-    error(token_.line, token_.column, "Ожидалось условие (read == \"...\", read != \"...\", not, или '(')");
+    error(token_.line, token_.column, "Ожидалось условие (read == \"...\", read != \"...\", x < N, not, или '(')");
     return nullptr;
 }

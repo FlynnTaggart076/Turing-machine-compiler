@@ -6,17 +6,23 @@
 
 /** @brief Типы токенов исходного кода */
 enum class TokenType {
-    Eof,
-    Identifier,
-    StringLiteral,
-    Semicolon,
-    LBrace,
-    RBrace,
-    LParen,
-    RParen,
-    EqEq,
-    NotEq,
-    Unknown
+    Eof,            // Конец файла
+    Identifier,     // Идентификатор (move_left, proc, main)
+    StringLiteral,  // Строковый литерал ("abc")
+    Number,         // Числовой литерал (42, -128)
+    Semicolon,      // Точка с запятой ;
+    LBrace,         // Левая фигурная скобка {
+    RBrace,         // Правая фигурная скобка }
+    LParen,         // Левая круглая скобка (
+    RParen,         // Правая круглая скобка )
+    EqEq,           // Равенство ==
+    NotEq,          // Неравенство !=
+    Assign,         // Присваивание =
+    Less,           // Меньше <
+    Greater,        // Больше >
+    PlusPlus,       // Инкремент ++
+    MinusMinus,     // Декремент --
+    Unknown         // Неизвестный токен
 };
 
 /** @brief Представление лексемы */
@@ -42,6 +48,7 @@ private:
     void skipWhitespace();
     Token readStringLiteral(int startLine, int startCol);
     Token readIdentifier(int startLine, int startCol);
+    Token readNumber(int startLine, int startCol);
 
     std::string_view source_;
     std::size_t pos_{0};

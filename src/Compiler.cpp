@@ -3,6 +3,7 @@
 #include "Flatten.h"
 #include "IR.h"
 #include "Lexer.h"
+#include "MemoryLayout.h"
 #include "TransitionGenerator.h"
 
 #include <algorithm>
@@ -20,6 +21,19 @@ static std::vector<std::string> splitBySpaces(const std::string& str) {
         tokens.push_back(tok);
     }
     return tokens;
+}
+
+/**
+ * @brief Проверяет, является ли символ зарезервированным системным символом.
+ * Зарезервированы: blank, BOM, EOM, 0_, 1_, #
+ */
+static bool isReservedSystemSymbol(const std::string& sym) {
+    return sym == "blank" ||
+           sym == MemoryLayout::kSymBOM ||
+           sym == MemoryLayout::kSymEOM ||
+           sym == MemoryLayout::kBit0 ||
+           sym == MemoryLayout::kBit1 ||
+           sym == MemoryLayout::kPosMarker;
 }
 
 // flatten and transition generation moved to dedicated modules
@@ -102,9 +116,9 @@ CompileResult Compiler::compile(std::string_view source) const {
                 // Разбиваем строку по пробелам и добавляем символы в алфавит
                 auto symbols = splitBySpaces(content);
                 for (const auto& sym : symbols) {
-                    // "blank" - зарезервированное слово
-                    if (sym == "blank") {
-                        error(strLine, strCol, "Имя 'blank' зарезервировано и не может использоваться в алфавите");
+                    // Проверка на зарезервированные системные символы
+                    if (isReservedSystemSymbol(sym)) {
+                        error(strLine, strCol, "Имя '" + sym + "' зарезервировано и не может использоваться в алфавите");
                         break;
                     }
                     // Проверка на дубликаты
@@ -117,6 +131,21 @@ CompileResult Compiler::compile(std::string_view source) const {
                 }
 
                 alphabetDefined = true;
+                
+                // Добавляем системные символы в alphabetSet И result.alphabet сразу после парсинга алфавита,
+                // чтобы write "0_"/"1_" работало и символы отображались в таблице переходов
+                auto addSystemSymbol = [&](const Symbol& sym) {
+                    if (!alphabetSet.count(sym)) {
+                        alphabetSet.insert(sym);
+                        result.alphabet.push_back(sym);
+                    }
+                };
+                addSystemSymbol(MemoryLayout::kSymBOM);
+                addSystemSymbol(MemoryLayout::kSymEOM);
+                addSystemSymbol(MemoryLayout::kBit0);
+                addSystemSymbol(MemoryLayout::kBit1);
+                addSystemSymbol(MemoryLayout::kPosMarker);
+                
                 token = lexer.next();
 
             // Setup "содержимое ленты"; - начальное содержимое ленты
@@ -458,6 +487,42 @@ CompileResult Compiler::compile(std::string_view source) const {
                             blockStack.push_back(currentBlock);
                             pendingIfStack.push_back(nestedWhile);
                             currentBlock = &nestedWhile->thenBranch;
+                        } else if (innerCmd == "x") {
+                            // Операции с переменной x внутри if
+                            token = lexer.next();
+                            if (token.type == TokenType::Assign) {
+                                token = lexer.next();
+                                if (token.type != TokenType::Number) {
+                                    error(token.line, token.column, "После 'x =' ожидалось число");
+                                    break;
+                                }
+                                int value = 0;
+                                try { value = std::stoi(token.value); } catch (...) {
+                                    error(token.line, token.column, "Некорректное число");
+                                    break;
+                                }
+                                if (value < -128 || value > 127) {
+                                    error(token.line, token.column, "Значение должно быть в диапазоне [-128..127]");
+                                    break;
+                                }
+                                token = lexer.next();
+                                if (!expect(TokenType::Semicolon, ";")) break;
+                                currentBlock->push_back(IRInstruction::varSetConst(value, innerLine, innerCol));
+                                token = lexer.next();
+                            } else if (token.type == TokenType::PlusPlus) {
+                                token = lexer.next();
+                                if (!expect(TokenType::Semicolon, ";")) break;
+                                currentBlock->push_back(IRInstruction::varInc(innerLine, innerCol));
+                                token = lexer.next();
+                            } else if (token.type == TokenType::MinusMinus) {
+                                token = lexer.next();
+                                if (!expect(TokenType::Semicolon, ";")) break;
+                                currentBlock->push_back(IRInstruction::varDec(innerLine, innerCol));
+                                token = lexer.next();
+                            } else {
+                                error(token.line, token.column, "После 'x' ожидалось '=', '++' или '--'");
+                                break;
+                            }
                         } else {
                             error(innerLine, innerCol, "Неизвестная команда внутри if: '" + innerCmd + "'");
                             break;
@@ -617,6 +682,41 @@ CompileResult Compiler::compile(std::string_view source) const {
                                     blockStack.push_back(currentBlock);
                                     pendingIfStack.push_back(nested);
                                     currentBlock = &nested->thenBranch;
+                                } else if (innerCmd == "x") {
+                                    token = lexer.next();
+                                    if (token.type == TokenType::Assign) {
+                                        token = lexer.next();
+                                        if (token.type != TokenType::Number) {
+                                            error(token.line, token.column, "После 'x =' ожидалось число");
+                                            break;
+                                        }
+                                        int value = 0;
+                                        try { value = std::stoi(token.value); } catch (...) {
+                                            error(token.line, token.column, "Некорректное число");
+                                            break;
+                                        }
+                                        if (value < -128 || value > 127) {
+                                            error(token.line, token.column, "Значение должно быть в диапазоне [-128..127]");
+                                            break;
+                                        }
+                                        token = lexer.next();
+                                        if (!expect(TokenType::Semicolon, ";")) break;
+                                        currentBlock->push_back(IRInstruction::varSetConst(value, innerLine, innerCol));
+                                        token = lexer.next();
+                                    } else if (token.type == TokenType::PlusPlus) {
+                                        token = lexer.next();
+                                        if (!expect(TokenType::Semicolon, ";")) break;
+                                        currentBlock->push_back(IRInstruction::varInc(innerLine, innerCol));
+                                        token = lexer.next();
+                                    } else if (token.type == TokenType::MinusMinus) {
+                                        token = lexer.next();
+                                        if (!expect(TokenType::Semicolon, ";")) break;
+                                        currentBlock->push_back(IRInstruction::varDec(innerLine, innerCol));
+                                        token = lexer.next();
+                                    } else {
+                                        error(token.line, token.column, "После 'x' ожидалось '=', '++' или '--'");
+                                        break;
+                                    }
                                 } else {
                                     error(innerLine, innerCol, "Неизвестная команда внутри else if: '" + innerCmd + "'");
                                     break;
@@ -723,6 +823,41 @@ CompileResult Compiler::compile(std::string_view source) const {
                                             blockStack.push_back(currentBlock);
                                             pendingIfStack.push_back(n);
                                             currentBlock = &n->thenBranch;
+                                        } else if (ic == "x") {
+                                            token = lexer.next();
+                                            if (token.type == TokenType::Assign) {
+                                                token = lexer.next();
+                                                if (token.type != TokenType::Number) {
+                                                    error(token.line, token.column, "После 'x =' ожидалось число");
+                                                    break;
+                                                }
+                                                int value = 0;
+                                                try { value = std::stoi(token.value); } catch (...) {
+                                                    error(token.line, token.column, "Некорректное число");
+                                                    break;
+                                                }
+                                                if (value < -128 || value > 127) {
+                                                    error(token.line, token.column, "Значение должно быть в диапазоне [-128..127]");
+                                                    break;
+                                                }
+                                                token = lexer.next();
+                                                if (!expect(TokenType::Semicolon, ";")) break;
+                                                currentBlock->push_back(IRInstruction::varSetConst(value, il, icol));
+                                                token = lexer.next();
+                                            } else if (token.type == TokenType::PlusPlus) {
+                                                token = lexer.next();
+                                                if (!expect(TokenType::Semicolon, ";")) break;
+                                                currentBlock->push_back(IRInstruction::varInc(il, icol));
+                                                token = lexer.next();
+                                            } else if (token.type == TokenType::MinusMinus) {
+                                                token = lexer.next();
+                                                if (!expect(TokenType::Semicolon, ";")) break;
+                                                currentBlock->push_back(IRInstruction::varDec(il, icol));
+                                                token = lexer.next();
+                                            } else {
+                                                error(token.line, token.column, "После 'x' ожидалось '=', '++' или '--'");
+                                                break;
+                                            }
                                         } else {
                                             error(il, icol, "Неизвестная команда");
                                             break;
@@ -851,6 +986,41 @@ CompileResult Compiler::compile(std::string_view source) const {
                                     blockStack.push_back(currentBlock);
                                     pendingIfStack.push_back(nestedWhile);
                                     currentBlock = &nestedWhile->thenBranch;
+                                } else if (innerCmd == "x") {
+                                    token = lexer.next();
+                                    if (token.type == TokenType::Assign) {
+                                        token = lexer.next();
+                                        if (token.type != TokenType::Number) {
+                                            error(token.line, token.column, "После 'x =' ожидалось число");
+                                            break;
+                                        }
+                                        int value = 0;
+                                        try { value = std::stoi(token.value); } catch (...) {
+                                            error(token.line, token.column, "Некорректное число");
+                                            break;
+                                        }
+                                        if (value < -128 || value > 127) {
+                                            error(token.line, token.column, "Значение должно быть в диапазоне [-128..127]");
+                                            break;
+                                        }
+                                        token = lexer.next();
+                                        if (!expect(TokenType::Semicolon, ";")) break;
+                                        currentBlock->push_back(IRInstruction::varSetConst(value, innerLine, innerCol));
+                                        token = lexer.next();
+                                    } else if (token.type == TokenType::PlusPlus) {
+                                        token = lexer.next();
+                                        if (!expect(TokenType::Semicolon, ";")) break;
+                                        currentBlock->push_back(IRInstruction::varInc(innerLine, innerCol));
+                                        token = lexer.next();
+                                    } else if (token.type == TokenType::MinusMinus) {
+                                        token = lexer.next();
+                                        if (!expect(TokenType::Semicolon, ";")) break;
+                                        currentBlock->push_back(IRInstruction::varDec(innerLine, innerCol));
+                                        token = lexer.next();
+                                    } else {
+                                        error(token.line, token.column, "После 'x' ожидалось '=', '++' или '--'");
+                                        break;
+                                    }
                                 } else {
                                     error(innerLine, innerCol, "Неизвестная команда внутри else: '" + innerCmd + "'");
                                     break;
@@ -1006,6 +1176,41 @@ CompileResult Compiler::compile(std::string_view source) const {
                             blockStack.push_back(currentBlock);
                             pendingIfStack.push_back(nestedWhile);
                             currentBlock = &nestedWhile->thenBranch;
+                        } else if (innerCmd == "x") {
+                            token = lexer.next();
+                            if (token.type == TokenType::Assign) {
+                                token = lexer.next();
+                                if (token.type != TokenType::Number) {
+                                    error(token.line, token.column, "После 'x =' ожидалось число");
+                                    break;
+                                }
+                                int value = 0;
+                                try { value = std::stoi(token.value); } catch (...) {
+                                    error(token.line, token.column, "Некорректное число");
+                                    break;
+                                }
+                                if (value < -128 || value > 127) {
+                                    error(token.line, token.column, "Значение должно быть в диапазоне [-128..127]");
+                                    break;
+                                }
+                                token = lexer.next();
+                                if (!expect(TokenType::Semicolon, ";")) break;
+                                currentBlock->push_back(IRInstruction::varSetConst(value, innerLine, innerCol));
+                                token = lexer.next();
+                            } else if (token.type == TokenType::PlusPlus) {
+                                token = lexer.next();
+                                if (!expect(TokenType::Semicolon, ";")) break;
+                                currentBlock->push_back(IRInstruction::varInc(innerLine, innerCol));
+                                token = lexer.next();
+                            } else if (token.type == TokenType::MinusMinus) {
+                                token = lexer.next();
+                                if (!expect(TokenType::Semicolon, ";")) break;
+                                currentBlock->push_back(IRInstruction::varDec(innerLine, innerCol));
+                                token = lexer.next();
+                            } else {
+                                error(token.line, token.column, "После 'x' ожидалось '=', '++' или '--'");
+                                break;
+                            }
                         } else {
                             error(innerLine, innerCol, "Неизвестная команда внутри while: '" + innerCmd + "'");
                             break;
@@ -1022,6 +1227,65 @@ CompileResult Compiler::compile(std::string_view source) const {
                 // Создаём IR-инструкцию while с телом цикла
                 auto whileInstr = IRInstruction::whileLoop(cond, std::move(loopBody), cmdLine, cmdCol);
                 if (!addInstruction(whileInstr)) break;
+
+            // Операции с переменной x
+            } else if (cmd == "x") {
+                if (!alphabetDefined) {
+                    error(cmdLine, cmdCol, "x: сначала нужно определить Set_alphabet");
+                    break;
+                }
+
+                // Смотрим следующий токен: = (присваивание), ++ или --
+                token = lexer.next();
+                
+                if (token.type == TokenType::Assign) {
+                    // x = <число>;
+                    token = lexer.next();
+                    if (token.type != TokenType::Number) {
+                        error(token.line, token.column, "После 'x =' ожидалось число");
+                        break;
+                    }
+                    
+                    int value = 0;
+                    try {
+                        value = std::stoi(token.value);
+                    } catch (...) {
+                        error(token.line, token.column, "Некорректное число: '" + token.value + "'");
+                        break;
+                    }
+                    
+                    // Проверка диапазона [-128; 127]
+                    if (value < -128 || value > 127) {
+                        error(token.line, token.column, "Значение должно быть в диапазоне [-128..127]");
+                        break;
+                    }
+                    
+                    token = lexer.next();
+                    if (!expect(TokenType::Semicolon, ";")) break;
+                    
+                    if (!addInstruction(IRInstruction::varSetConst(value, cmdLine, cmdCol))) break;
+                    token = lexer.next();
+                    
+                } else if (token.type == TokenType::PlusPlus) {
+                    // x++;
+                    token = lexer.next();
+                    if (!expect(TokenType::Semicolon, ";")) break;
+                    
+                    if (!addInstruction(IRInstruction::varInc(cmdLine, cmdCol))) break;
+                    token = lexer.next();
+                    
+                } else if (token.type == TokenType::MinusMinus) {
+                    // x--;
+                    token = lexer.next();
+                    if (!expect(TokenType::Semicolon, ";")) break;
+                    
+                    if (!addInstruction(IRInstruction::varDec(cmdLine, cmdCol))) break;
+                    token = lexer.next();
+                    
+                } else {
+                    error(token.line, token.column, "После 'x' ожидалось '=', '++' или '--'");
+                    break;
+                }
 
             } else {
                 // Неизвестная команда
@@ -1073,6 +1337,34 @@ CompileResult Compiler::compile(std::string_view source) const {
         result.diagnostics.push_back({DiagnosticLevel::Warning, 1, 1, "Setup не определён"});
     }
 
+
+
+    // ИНИЦИАЛИЗАЦИЯ СИСТЕМНОЙ ПАМЯТИ
+
+    // Добавляем системные символы в алфавит
+    auto addToAlphabet = [&](const Symbol& sym) {
+        if (!alphabetSet.count(sym)) {
+            alphabetSet.insert(sym);
+            result.alphabet.push_back(sym);
+        }
+    };
+    
+    addToAlphabet(MemoryLayout::kSymBOM);
+    addToAlphabet(MemoryLayout::kSymEOM);
+    addToAlphabet(MemoryLayout::kBit0);
+    addToAlphabet(MemoryLayout::kBit1);
+    addToAlphabet(MemoryLayout::kPosMarker);  // Маркер позиции для var-операций
+    
+    // Инициализируем системную зону на ленте
+    result.initialTape.set(MemoryLayout::kMemBegin, MemoryLayout::kSymBOM);  // -10 - BOM
+    result.initialTape.set(MemoryLayout::kMemEnd, MemoryLayout::kSymEOM);    // -1  - EOM
+    
+    // Инициализируем 8 бит переменной x нулями (позиции -9..-2)
+    for (int i = 0; i < MemoryLayout::kMemBits; i++) {
+        result.initialTape.set(MemoryLayout::kMSBPosition + i, MemoryLayout::kBit0);
+    }
+    // ========================================================================
+
     // Генерация кода: IR → TransitionTable
     if (result.ok && procedures.count("main")) {
         IRBlock flatInstructions;
@@ -1098,3 +1390,20 @@ CompileResult Compiler::compile(std::string_view source) const {
 
     return result;
 }
+
+
+/*
+Set_alphabet "1 0"; 
+Setup "";
+
+proc main {
+    x = 0;
+    while (x < 3) {
+        write "1";
+        move_right;
+        x++;
+    }
+}
+
+
+*/

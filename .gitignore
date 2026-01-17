@@ -1,0 +1,33 @@
+# Build directories
+build/
+build-*/
+
+# IDE
+.vs/
+.vscode/
+*.vcxproj*
+*.sln
+
+# CMake generated
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Binaries
+*.exe
+*.dll
+*.lib
+*.a
+*.o
+*.obj
+
+# Temporary files
+*.tmp
+*.log
+*.bak
+*~
+
+# Test files in root (keep documentation)
+test_*.txt
+preset.txt

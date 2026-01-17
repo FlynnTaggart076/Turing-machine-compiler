@@ -14,6 +14,7 @@ add_executable(turing_machine
     src/Condition.cpp
     src/IR.cpp
     src/Flatten.cpp
+    src/CodegenPrimitives.cpp
     src/TransitionGenerator.cpp
     src/Compiler.cpp
     src/Interpreter.cpp

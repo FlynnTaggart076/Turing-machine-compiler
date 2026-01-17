@@ -4,6 +4,9 @@
 #include <optional>
 #include <cmath>
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <filesystem>
 
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
@@ -13,6 +16,38 @@
 App::App() {
     // Моноширинный шрифт Consolas
     fontLoaded_ = font_.openFromFile("C:/Windows/Fonts/consola.ttf");
+
+    // Загрузка preset.txt или использование шаблона по умолчанию
+    const std::string defaultCode = 
+        "Set_alphabet \"\";\n"
+        "Setup \"\";\n"
+        "\n"
+        "proc main() {\n"
+        "\n"
+        "}\n";
+    
+    std::string presetCode;
+    std::ifstream presetFile("preset.txt");
+    if (presetFile.is_open()) {
+        std::ostringstream ss;
+        ss << presetFile.rdbuf();
+        presetCode = ss.str();
+        presetFile.close();
+    }
+    
+    // Если preset.txt пуст или не существует - используем шаблон
+    sourceCode_ = presetCode.empty() ? defaultCode : presetCode;
+    
+    // Разбиваем код на строки для редактора
+    editorLines_.clear();
+    std::istringstream iss(sourceCode_);
+    std::string line;
+    while (std::getline(iss, line)) {
+        editorLines_.push_back(line);
+    }
+    if (editorLines_.empty()) {
+        editorLines_.push_back("");
+    }
 
     Compiler compiler;
     lastCompile_ = compiler.compile(sourceCode_);
@@ -74,29 +109,31 @@ void App::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
             handleEditorKey(*key);
         }
 
-        // Горячие клавиши управления симулятором
-        switch (key->code) {
-        case sf::Keyboard::Key::C:
-            requestCompile();
-            break;
-        case sf::Keyboard::Key::R:
-            requestResetMachine();
-            break;
-        case sf::Keyboard::Key::Space:
-            requestStep();
-            break;
-        case sf::Keyboard::Key::P:
-            if (mode_ == AppMode::Running) {
-                requestPause();
-            } else {
-                requestRun();
+        // Горячие клавиши управления симулятором (требуют Ctrl)
+        if (key->control) {
+            switch (key->code) {
+            case sf::Keyboard::Key::C:
+                requestCompile();
+                break;
+            case sf::Keyboard::Key::R:
+                requestResetMachine();
+                break;
+            case sf::Keyboard::Key::Space:
+                requestStep();
+                break;
+            case sf::Keyboard::Key::P:
+                if (mode_ == AppMode::Running) {
+                    requestPause();
+                } else {
+                    requestRun();
+                }
+                break;
+            case sf::Keyboard::Key::S:
+                requestStop();
+                break;
+            default:
+                break;
             }
-            break;
-        case sf::Keyboard::Key::S:
-            requestStop();
-            break;
-        default:
-            break;
         }
     }
 
@@ -445,6 +482,14 @@ void App::handleEditorText(char32_t unicode) {
 void App::handleEditorKey(const sf::Event::KeyPressed& key) {
     auto& line = editorLines_[cursorRow_];
     switch (key.code) {
+    
+    // TAB - вставка 4 пробелов
+    case sf::Keyboard::Key::Tab: {
+        line.insert(cursorCol_, "    ");
+        cursorCol_ += 4;
+        markEdited();
+        break;
+    }
     
     // ENTER - создание новой строки
     case sf::Keyboard::Key::Enter: {
