@@ -7,21 +7,21 @@
 /** @brief Типы токенов исходного кода */
 enum class TokenType {
     Eof,            // Конец файла
-    Identifier,     // Идентификатор (move_left, proc, main)
-    StringLiteral,  // Строковый литерал ("abc")
-    Number,         // Числовой литерал (42, -128)
-    Semicolon,      // Точка с запятой ;
-    LBrace,         // Левая фигурная скобка {
-    RBrace,         // Правая фигурная скобка }
-    LParen,         // Левая круглая скобка (
-    RParen,         // Правая круглая скобка )
-    EqEq,           // Равенство ==
-    NotEq,          // Неравенство !=
-    Assign,         // Присваивание =
-    Less,           // Меньше <
-    Greater,        // Больше >
-    PlusPlus,       // Инкремент ++
-    MinusMinus,     // Декремент --
+    Identifier,     // Идентификатор
+    StringLiteral,  // Строковый литерал
+    Number,         // Числовой литерал
+    Semicolon,      // ;
+    LBrace,         // {
+    RBrace,         // }
+    LParen,         // (
+    RParen,         // )
+    EqEq,           // ==
+    NotEq,          // !=
+    Assign,         // =
+    Less,           // <
+    Greater,        // >
+    PlusPlus,       // ++
+    MinusMinus,     // --
     Unknown         // Неизвестный токен
 };
 
